@@ -26,7 +26,11 @@ function getHumanChoice() {
 
 
 // Run the function multiple times to see if it varies randomly
-console.log("Test 1:", getComputerChoice());
-console.log("Test 2:", getComputerChoice());
-console.log("Test 3:", getComputerChoice());
-console.log("Test 4:", getComputerChoice());
+//console.log("Test 1:", getComputerChoice());
+//console.log("Test 2:", getComputerChoice());
+//console.log("Test 3:", getComputerChoice());
+//console.log("Test 4:", getComputerChoice());
+
+// Run the human choice function and log the result
+const humanSelection = getHumanChoice();
+console.log("The human chose:", humanSelection);

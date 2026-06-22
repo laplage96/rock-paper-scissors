@@ -28,6 +28,30 @@ function getHumanChoice() {
     return standardizedChoice;
 }
 
+function playRound(humanChoice, computerChoice) {
+    // 1. Check for a tie
+    if (humanChoice === computerChoice) {
+        console.log(`It's a tie! Both chose ${humanChoice}.`);
+    } 
+    // 2. Check for all human winning combinations
+    else if (
+        (humanChoice === "rock" && computerChoice === "scissors") ||
+        (humanChoice === "paper" && computerChoice === "rock") ||
+        (humanChoice === "scissors" && computerChoice === "paper")
+    ) {
+        // Capitalize first letter for clean printing formatting
+        let humanFormatted = humanChoice.charAt(0).toUpperCase() + humanChoice.slice(1);
+        console.log(`You win! ${humanFormatted} beats ${computerChoice}.`);
+        humanScore++;
+    } 
+    // 3. If it's not a tie and human didn't win, the computer wins
+    else {
+        let computerFormatted = computerChoice.charAt(0).toUpperCase() + computerChoice.slice(1);
+        console.log(`You lose! ${computerFormatted} beats ${humanChoice}.`);
+        computerScore++;
+    }
+}
+
 
 
 // Run the function multiple times to see if it varies randomly
@@ -37,6 +61,19 @@ function getHumanChoice() {
 //console.log("Test 4:", getComputerChoice());
 
 // Run the human choice function and log the result
+//const humanSelection = getHumanChoice();
+//console.log("The human chose:", humanSelection);
+//console.log("Initial Scores -> Human:", humanScore, "| Computer:", computerScore);
+
+
+// Triggering a single round sequence
 const humanSelection = getHumanChoice();
-console.log("The human chose:", humanSelection);
-console.log("Initial Scores -> Human:", humanScore, "| Computer:", computerScore);
+const computerSelection = getComputerChoice();
+
+console.log("Human selection:", humanSelection);
+console.log("Computer selection:", computerSelection);
+
+playRound(humanSelection, computerSelection);
+
+// Log scores to verify incrementing works
+console.log(`Updated Scores -> Human: ${humanScore} | Computer: ${computerScore}`);

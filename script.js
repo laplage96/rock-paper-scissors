@@ -1,3 +1,8 @@
+// Global scope variables to keep track of the game score
+let humanScore = 0;
+let computerScore = 0;
+
+
 function getComputerChoice() {
     // 1. Generate the random value
     let randomVal = Math.random();
@@ -34,3 +39,4 @@ function getHumanChoice() {
 // Run the human choice function and log the result
 const humanSelection = getHumanChoice();
 console.log("The human chose:", humanSelection);
+console.log("Initial Scores -> Human:", humanScore, "| Computer:", computerScore);

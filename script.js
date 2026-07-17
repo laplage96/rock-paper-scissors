@@ -10,6 +10,12 @@ function getComputerChoice() {
 let humanScore = 0;
 let computerScore = 0;
 
+
+// --- DOM ELEMENTS ---
+const roundStatus = document.querySelector('#round-status');
+const scoreBoard = document.querySelector('#score-board');
+const buttons = document.querySelector('#button-container');
+
 // --- CORE ROUND LOGIC ---
 function playRound(humanChoice, computerChoice) {
     if (humanChoice === computerChoice) {
@@ -19,27 +25,35 @@ function playRound(humanChoice, computerChoice) {
         (humanChoice === "paper" && computerChoice === "rock") ||
         (humanChoice === "scissors" && computerChoice === "paper")
     ) {
-        console.log(`You win this round! ${humanChoice} beats ${computerChoice}.`);
+        roundStatus.textContent = `You win this round! ${humanChoice} beats ${computerChoice}.`;
         humanScore++;
     } else {
-        console.log(`You lose this round! ${computerChoice} beats ${humanChoice}.`);
+        roundStatus.textContent = `You lose this round! ${computerChoice} beats ${humanChoice}.`;
         computerScore++;
     }
     
-    // Log scores to verify everything is working in the console
-    console.log(`Current Score -> You: ${humanScore} | Computer: ${computerScore}`);
+    // Update the running score
+    scoreBoard.textContent = `Player: ${humanScore} | Computer: ${computerScore}`;
+
+    // Check for the winner
+    if (humanScore === 5 || computerScore === 5) {
+        announceWinner();
+    }
 }
 
-// --- EVENT LISTENER SETUP ---
-// We select the container (Event Delegation)
-const buttons = document.querySelector('#button-container');
+function announceWinner() {
+    const winner = humanScore === 5 ? "🏆 YOU WON THE GAME!" : "💻 COMPUTER WON THE GAME!";
+    roundStatus.textContent = winner;
+
+    // Reset scores for a new game
+    humanScore = 0;
+    computerScore = 0;
+    // Note: scoreBoard will update on the next click
+}
 
 buttons.addEventListener('click', (event) => {
     // Check if the clicked element is one of our buttons
     if (event.target.tagName === 'BUTTON') {
-        const humanSelection = event.target.id; // 'rock', 'paper', or 'scissors'
-        const computerSelection = getComputerChoice();
-        
-        playRound(humanSelection, computerSelection);
+        playRound(event.target.id, getComputerChoice());
     }
 });
